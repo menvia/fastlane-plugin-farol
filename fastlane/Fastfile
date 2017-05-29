@@ -1,3 +1,12 @@
 lane :test do
-  farol
+  token = ''
+  platform = 'ios'
+
+  result = farol_get_version(token: token, platform: platform)
+  puts result
+
+  farol_set_version(token: token, platform: platform, version: '1.0.0', build: 0)
+
+  result = farol_get_version(token: token, platform: platform)
+  puts result
 end

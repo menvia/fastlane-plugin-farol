@@ -8,3 +8,7 @@ Gemfile.lock
 /rdoc/
 fastlane/README.md
 fastlane/report.xml
+
+# others
+*.DS_Store
+Target/
