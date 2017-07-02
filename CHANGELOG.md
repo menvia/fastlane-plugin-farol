@@ -1,3 +1,8 @@
+## 0.4.4 / 02.07.2017
+
+##### Fix
+- Fix action farol_api changing form_data type to hash instead of string
+
 ## 0.4.3 / 02.07.2017
 
 ##### Fix

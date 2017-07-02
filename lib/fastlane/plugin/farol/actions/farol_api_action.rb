@@ -51,7 +51,7 @@ module Fastlane
                                   env_name: "FORM_DATA",
                                description: "Data to be sent to the Farol API",
                                   optional: true,
-                                      type: String)
+                                      type: Hash)
         ]
       end
 
