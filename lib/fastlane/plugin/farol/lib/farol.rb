@@ -3,6 +3,9 @@ module Fastlane
     class Api
       def request(token, verb, method, form_data = nil)
         farol_url = 'https://frl.io:443'
+        if ENV["FAROL_URL"]
+          farol_url = ENV["FAROL_URL"]
+        end
 
         # Create Cognito credentials
         url = URI(farol_url + '/' + method)

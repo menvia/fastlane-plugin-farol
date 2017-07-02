@@ -4,7 +4,15 @@ lane :test do
   farol(token: token, app_id: app_id)
 end
 
-lane :method do
+lane :local_api_version do
+  ENV["FAROL_URL"] = 'http://localhost:3000'
+  token = ''
+  verb = 'get'
+  method = 'version'
+  puts farol_api(token: token, verb: verb, method: method)
+end
+
+lane :remote_api_version do
   token = ''
   verb = 'get'
   method = 'version'
