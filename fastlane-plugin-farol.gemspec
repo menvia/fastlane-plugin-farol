@@ -1,4 +1,5 @@
 # coding: utf-8
+
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'fastlane/plugin/farol/version'
@@ -6,10 +7,10 @@ require 'fastlane/plugin/farol/version'
 Gem::Specification.new do |spec|
   spec.name          = 'fastlane-plugin-farol'
   spec.version       = Fastlane::Farol::VERSION
-  spec.author        = %q{Felipe Plets}
-  spec.email         = %q{felipe.plets@menvia.com}
+  spec.author        = 'Felipe Plets'
+  spec.email         = 'felipe.plets@menvia.com'
 
-  spec.summary       = %q{Enable your app to use Farol Platform services}
+  spec.summary       = 'Enable your app to use Farol Platform services'
   spec.homepage      = "https://github.com/menvia/fastlane-plugin-farol"
   spec.license       = "MIT"
 

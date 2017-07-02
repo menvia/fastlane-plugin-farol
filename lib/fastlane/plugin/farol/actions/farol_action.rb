@@ -2,13 +2,13 @@ module Fastlane
   module Actions
     class FarolAction < Action
       def self.run(params)
-        baseFolder 		= ''
-        fasFolder 		= baseFolder + '.fas/'
-        targetFolder 	= baseFolder + 'Target/'
+        baseFolder	= ''
+        fasFolder	= baseFolder + '.fas/'
+        targetFolder	= baseFolder + 'Target/'
 
         # Reset target folder
-      	FileUtils.rm_rf Dir.glob(targetFolder)
-      	Dir.mkdir(targetFolder)
+        FileUtils.rm_rf Dir.glob(targetFolder)
+        Dir.mkdir(targetFolder)
 
         # Create Farol Api
         api = Farol::Api.new
@@ -21,12 +21,11 @@ module Fastlane
         # Download app content
         result = api.request(token, 'get', 'app/' + params[:app_id])
         self.saveFile('App', result)
-
       end
 
       def self.saveFile(fileName, result)
-        baseFolder 		= ''
-        targetFolder 	= baseFolder + 'Target/'
+        baseFolder	= ''
+        targetFolder	= baseFolder + 'Target/'
         File.open(targetFolder + fileName + '.json', 'w') do |f|
           f.puts JSON.pretty_generate(result)
         end

@@ -7,7 +7,7 @@ module Fastlane
         # Create Cognito credentials
         url = URI(farolURL + '/' + method)
         Net::HTTP.start(url.host, url.port,
-          :use_ssl => url.scheme == 'https') do |http|
+                        use_ssl: url.scheme == 'https') do |http|
 
           if verb == 'post'
             request = Net::HTTP::Post.new url
@@ -21,14 +21,14 @@ module Fastlane
           request['authorization'] = token
           response = http.request request # Net::HTTPResponse object
           case response
-            when Net::HTTPSuccess
-              return JSON.parse response.read_body
-            when Net::HTTPUnauthorized
-              UI.error("Farol: #{response.message} - is your authorization token correct?")
-            when Net::HTTPServerError
-              UI.error("Farol: #{response.message} - try again later?")
-            else
-              UI.error("Farol: #{response.message}")
+          when Net::HTTPSuccess
+            return JSON.parse response.read_body
+          when Net::HTTPUnauthorized
+            UI.error("Farol: #{response.message} - is your authorization token correct?")
+          when Net::HTTPServerError
+            UI.error("Farol: #{response.message} - try again later?")
+          else
+            UI.error("Farol: #{response.message}")
           end
           return false
         end

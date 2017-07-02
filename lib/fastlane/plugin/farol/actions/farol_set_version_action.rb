@@ -6,7 +6,7 @@ module Fastlane
         token = params[:token]
         verb = 'post'
         method = 'app/version/' + params[:platform]
-        form_data = {"version" => params[:version], "build" => params[:build]}
+        form_data = { "version" => params[:version], "build" => params[:build] }
         api.request(token, verb, method, form_data)
       end
 
