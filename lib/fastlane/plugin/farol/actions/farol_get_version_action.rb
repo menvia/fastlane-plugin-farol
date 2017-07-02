@@ -1,35 +1,12 @@
 module Fastlane
   module Actions
-    class FarolAction < Action
+    class FarolGetVersionAction < Action
       def self.run(params)
-        baseFolder 		= ''
-        fasFolder 		= baseFolder + '.fas/'
-        targetFolder 	= baseFolder + 'Target/'
-
-        # Reset target folder
-      	FileUtils.rm_rf Dir.glob(targetFolder)
-      	Dir.mkdir(targetFolder)
-
-        # Create Farol Api
         api = Farol::Api.new
         token = params[:token]
-
-        # Download event content
-        result = api.request(token, 'get', 'event/event')
-        self.saveFile('Event', result)
-
-        # Download app content
-        result = api.request(token, 'get', 'app/' + params[:app_id])
-        self.saveFile('App', result)
-
-      end
-
-      def self.saveFile(fileName, result)
-        baseFolder 		= ''
-        targetFolder 	= baseFolder + 'Target/'
-        File.open(targetFolder + fileName + '.json', 'w') do |f|
-          f.puts JSON.pretty_generate(result)
-        end
+        verb = 'get'
+        method = 'app/version/' + params[:platform]
+        api.request(token, verb, method)
       end
 
       def self.description
@@ -56,9 +33,9 @@ module Fastlane
                                description: "The token for your Farol App",
                                   optional: false,
                                       type: String),
-          FastlaneCore::ConfigItem.new(key: :app_id,
-                                  env_name: "APP_ID",
-                               description: "The app id for your Farol App",
+          FastlaneCore::ConfigItem.new(key: :platform,
+                                  env_name: "PLATFORM",
+                               description: "The platform you want to get the version",
                                   optional: false,
                                       type: String)
         ]

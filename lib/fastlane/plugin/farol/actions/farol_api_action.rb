@@ -1,35 +1,16 @@
 module Fastlane
   module Actions
-    class FarolAction < Action
+    class FarolApiAction < Action
       def self.run(params)
-        baseFolder 		= ''
-        fasFolder 		= baseFolder + '.fas/'
-        targetFolder 	= baseFolder + 'Target/'
-
-        # Reset target folder
-      	FileUtils.rm_rf Dir.glob(targetFolder)
-      	Dir.mkdir(targetFolder)
-
         # Create Farol Api
         api = Farol::Api.new
         token = params[:token]
+        verb = params[:verb]
+        method = params[:method]
+        form_data = params[:form_data]
 
         # Download event content
-        result = api.request(token, 'get', 'event/event')
-        self.saveFile('Event', result)
-
-        # Download app content
-        result = api.request(token, 'get', 'app/' + params[:app_id])
-        self.saveFile('App', result)
-
-      end
-
-      def self.saveFile(fileName, result)
-        baseFolder 		= ''
-        targetFolder 	= baseFolder + 'Target/'
-        File.open(targetFolder + fileName + '.json', 'w') do |f|
-          f.puts JSON.pretty_generate(result)
-        end
+        api.request(token, verb, method, form_data)
       end
 
       def self.description
@@ -56,10 +37,20 @@ module Fastlane
                                description: "The token for your Farol App",
                                   optional: false,
                                       type: String),
-          FastlaneCore::ConfigItem.new(key: :app_id,
-                                  env_name: "APP_ID",
-                               description: "The app id for your Farol App",
+          FastlaneCore::ConfigItem.new(key: :verb,
+                                  env_name: "VERB",
+                               description: "The Farol API operation verb",
                                   optional: false,
+                                      type: String),
+          FastlaneCore::ConfigItem.new(key: :method,
+                                  env_name: "METHOD",
+                               description: "The Method to be performed by the Farol API",
+                                  optional: false,
+                                      type: String),
+          FastlaneCore::ConfigItem.new(key: :form_data,
+                                  env_name: "FORM_DATA",
+                               description: "Data to be sent to the Farol API",
+                                  optional: true,
                                       type: String)
         ]
       end

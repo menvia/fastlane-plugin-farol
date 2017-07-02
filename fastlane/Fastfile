@@ -1,5 +1,18 @@
 lane :test do
   token = ''
+  app_id = ''
+  farol(token: token, app_id: app_id)
+end
+
+lane :method do
+  token = ''
+  verb = 'get'
+  method = 'version'
+  puts farol_api(token: token, verb: verb, method: method)
+end
+
+lane :version do
+  token = ''
   platform = 'ios'
 
   result = farol_get_version(token: token, platform: platform)
