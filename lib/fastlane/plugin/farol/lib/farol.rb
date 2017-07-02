@@ -2,10 +2,10 @@ module Fastlane
   module Farol
     class Api
       def request(token, verb, method, form_data = nil)
-        farolURL = 'https://frl.io:443'
+        farol_url = 'https://frl.io:443'
 
         # Create Cognito credentials
-        url = URI(farolURL + '/' + method)
+        url = URI(farol_url + '/' + method)
         Net::HTTP.start(url.host, url.port,
                         use_ssl: url.scheme == 'https') do |http|
 
