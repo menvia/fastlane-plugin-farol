@@ -14,7 +14,9 @@ module Fastlane
 
           if verb == 'post'
             request = Net::HTTP::Post.new url
-            request.set_form_data(form_data)
+            if form_data
+              request.set_form_data(form_data)
+            end
           elsif verb == 'put'
             request = Net::HTTP::Put.new url
           else

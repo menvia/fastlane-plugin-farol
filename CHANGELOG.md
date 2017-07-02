@@ -1,3 +1,8 @@
+## 0.4.1 / 02.07.2017
+
+##### Fix
+- Fix post method to only send form data if not nil
+
 ## 0.4.0 / 02.07.2017
 
 ##### Enhancement
