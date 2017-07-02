@@ -1,3 +1,8 @@
+## 0.4.3 / 02.07.2017
+
+##### Fix
+- Fix methods api call to check if the return is a valid JSON string
+
 ## 0.4.2 / 02.07.2017
 
 ##### Fix

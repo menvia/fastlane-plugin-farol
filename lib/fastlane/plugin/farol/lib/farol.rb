@@ -27,7 +27,7 @@ module Fastlane
           response = http.request request # Net::HTTPResponse object
           case response
           when Net::HTTPSuccess
-            if response.read_body
+            if valid_json(response.read_body)
               return JSON.parse response.read_body
             else
               return true
@@ -41,6 +41,14 @@ module Fastlane
           end
           return false
         end
+      end
+
+      # Check if the parameter is a valid JSON string
+      def valid_json(json)
+          JSON.parse(json)
+          return true
+        rescue JSON::ParserError => e
+          return false
       end
     end
   end
