@@ -27,7 +27,11 @@ module Fastlane
           response = http.request request # Net::HTTPResponse object
           case response
           when Net::HTTPSuccess
-            return JSON.parse response.read_body
+            if response.read_body
+              return JSON.parse response.read_body
+            else
+              return true
+            end
           when Net::HTTPUnauthorized
             UI.error("Farol: #{response.message} - is your authorization token correct?")
           when Net::HTTPServerError

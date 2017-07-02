@@ -1,3 +1,8 @@
+## 0.4.2 / 02.07.2017
+
+##### Fix
+- Fix methods api call to methods that have an empty return
+
 ## 0.4.1 / 02.07.2017
 
 ##### Fix
