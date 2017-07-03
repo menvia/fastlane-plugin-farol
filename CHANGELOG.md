@@ -1,3 +1,8 @@
+## 0.4.5 / 03.07.2017
+
+##### Fix
+- Fix put method on farol_api to send out form data
+
 ## 0.4.4 / 02.07.2017
 
 ##### Fix

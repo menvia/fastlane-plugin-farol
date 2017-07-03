@@ -7,7 +7,7 @@ module Fastlane
           farol_url = ENV["FAROL_URL"]
         end
 
-        # Create Cognito credentials
+        # Create the URL to be called
         url = URI(farol_url + '/' + method)
         Net::HTTP.start(url.host, url.port,
                         use_ssl: url.scheme == 'https') do |http|
@@ -19,6 +19,9 @@ module Fastlane
             end
           elsif verb == 'put'
             request = Net::HTTP::Put.new url
+            if form_data
+              request.set_form_data(form_data)
+            end
           else
             request = Net::HTTP::Get.new url
           end
