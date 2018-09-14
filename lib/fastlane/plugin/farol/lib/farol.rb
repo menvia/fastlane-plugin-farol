@@ -9,7 +9,7 @@ module Fastlane
 
         # Create the URL to be called
         url = URI(farol_url + '/' + method)
-        Net::HTTP.start(url.host, url.port,
+        response = Net::HTTP.start(url.host, url.port,
                         use_ssl: url.scheme == 'https') do |http|
 
           if verb == 'post'
@@ -27,23 +27,23 @@ module Fastlane
           end
 
           request['authorization'] = token
-          response = http.request request # Net::HTTPResponse object
-          case response
-          when Net::HTTPSuccess
-            if valid_json(response.read_body)
-              return JSON.parse response.read_body
-            else
-              return true
-            end
-          when Net::HTTPUnauthorized
-            UI.error("Farol: #{response.message} - is your authorization token correct?")
-          when Net::HTTPServerError
-            UI.error("Farol: #{response.message} - try again later?")
-          else
-            UI.error("Farol: #{response.message}")
-          end
-          return false
+          http.request(request) # Net::HTTPResponse object
         end
+        case response
+        when Net::HTTPSuccess
+          if valid_json(response.read_body)
+            return JSON.parse response.read_body
+          else
+            return true
+          end
+        when Net::HTTPUnauthorized
+          UI.error("Farol: #{response.message} - is your authorization token correct?")
+        when Net::HTTPServerError
+          UI.error("Farol: #{response.message} - try again later?")
+        else
+          UI.error("Farol: #{response.message}")
+        end
+        return false
       end
 
       # Check if the parameter is a valid JSON string

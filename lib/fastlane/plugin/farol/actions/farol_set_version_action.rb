@@ -5,7 +5,7 @@ module Fastlane
         api = Farol::Api.new
         token = params[:token]
         verb = 'post'
-        method = 'app/version/' + params[:platform]
+        method = 'project/version/' + params[:platform]
         form_data = { "version" => params[:version], "build" => params[:build] }
         api.request(token, verb, method, form_data)
       end

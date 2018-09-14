@@ -1,3 +1,9 @@
+## 0.5.0 / 14.09.2018
+##### Enhancements
+- Update api method path from app to project
+- Fix get version method that was not working because of api updates
+
+
 ## 0.4.5 / 03.07.2017
 
 ##### Fix
